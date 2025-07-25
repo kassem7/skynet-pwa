@@ -76,7 +76,7 @@ function generateCards() {
       const card = document.createElement("div");
       card.className = "card-wrapper";
       card.innerHTML = `
-        <div class="card" style="background-image: url('img/${background}')">
+        <div class="card" style="background-image: url(${background})">
           <div class="duration">${duration}</div>
           <div class="network">${network}</div>
           <div class="code">${code}</div>
