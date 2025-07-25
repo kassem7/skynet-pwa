@@ -7,7 +7,7 @@
   "theme_color": "#007BFF",
   "icons": [
     {
-      "src": "img/card1.png",
+      "src": "card1.png",
       "sizes": "192x192",
       "type": "image/png"
     }
