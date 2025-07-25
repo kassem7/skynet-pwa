@@ -3,9 +3,9 @@ const assets = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./style/style.css",
-  "./script/script.js",
-  "./img/card1.png"
+  "./style.css",
+  "./script.js",
+  "./card1.png"
 ];
 
 // تثبيت الملفات
