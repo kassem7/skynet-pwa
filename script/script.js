@@ -1,100 +1,52 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const infoSelect = document.getElementById('info');
-  const limitSelect = document.getElementById('limit');
-  const commentSelect = document.getElementById('comment');
-
-  const mappings = {
-    '٥٠٠ ريال -- الحجم: ١ جيجا': {
-      limit: 'limit-bytes-total=1024M limit-uptime=7d',
-      comment: '500'
-    },
-    '١٠٠٠ ريال -- الحجم: ٢ جيجا': {
-      limit: 'limit-bytes-total=2143M limit-uptime=15d',
-      comment: '1000'
-    },
-    '١٥٠٠ ريال -- الحجم: ٣ جيجا': {
-      limit: 'limit-bytes-total=3072M limit-uptime=15d',
-      comment: '1500'
-    },
-    '٢٠٠٠ ريال -- الحجم: ٥ جيجا': {
-      limit: 'limit-bytes-total=5000M limit-uptime=30d',
-      comment: '2000'
-    },
-    '٣٠٠٠ ريال -- الحجم: ٩ جيجا': {
-      limit: 'limit-bytes-total=9659M limit-uptime=30d',
-      comment: '3000'
-    }
-  };
-
-  infoSelect.addEventListener('change', function () {
-    const selected = infoSelect.value;
-    if (mappings[selected]) {
-      limitSelect.value = mappings[selected].limit;
-      commentSelect.value = mappings[selected].comment;
-
-      const durationSelect = document.getElementById('duration');
-      if (mappings[selected].limit.includes('7d')) {
-        durationSelect.value = '7 يوم';
-      } else if (mappings[selected].limit.includes('15d')) {
-        durationSelect.value = '15 يوم';
-      } else if (mappings[selected].limit.includes('30d')) {
-        durationSelect.value = '30 يوم';
-      }
-    }
-  });
-});
-
-let generatedCodes = new Set();
-
-function generateUniqueCode(prefix) {
-  let code;
-  do {
-    code = prefix + Math.floor(100000 + Math.random() * 899999);
-  } while (generatedCodes.has(code));
-  generatedCodes.add(code);
-  return code;
-}
-
 function generateCards() {
   const container = document.getElementById("card-container");
   container.innerHTML = "";
-  generatedCodes.clear();
 
-  const background = document.getElementById("bg-select").value;
-  const network = document.getElementById("network-name").value;
+  const network = "سكاي نت";
   const duration = document.getElementById("duration").value;
   const info = document.getElementById("info").value;
-  const prefix = document.getElementById("prefix").value || "w";
+  const background = document.getElementById("bg-select").value;
+  const prefix = document.getElementById("prefix").value;
   const pages = parseInt(document.getElementById("pages").value);
-  const cardsPerPage = 9 * 4;
+  const comment = document.getElementById("comment").value;
+  const profile = document.getElementById("profile").value;
+  const limit = document.getElementById("limit").value;
+  const server = document.getElementById("server").value;
+
+  let scriptText = "";
+  window.generatedUsers = [];
+
+  function generateCode() {
+    const rand = Math.floor(100000 + Math.random() * 900000);
+    return prefix + rand;
+  }
 
   for (let p = 0; p < pages; p++) {
     const page = document.createElement("div");
     page.className = "page";
-    for (let i = 0; i < cardsPerPage; i++) {
-      const code = generateUniqueCode(prefix);
+
+    for (let i = 0; i < 56; i++) {
+      const code = generateCode();
+      window.generatedUsers.push(code);
       const card = document.createElement("div");
       card.className = "card-wrapper";
       card.innerHTML = `
         <div class="card" style="background-image: url('img/${background}')">
           <div class="duration">${duration}</div>
-          <div class="network">${network}</div>
+          <div class="network-name">${network}</div>
           <div class="code">${code}</div>
           <div class="info">${info}</div>
+          <div class="username-label">الرمز  :  </div>
         </div>
       `;
       page.appendChild(card);
     }
     container.appendChild(page);
   }
-
-  alert(`✅ تم توليد ${generatedCodes.size} كرت في ${pages} صفحة`);
 }
 
 function downloadPDF() {
-function downloadPDF() {
   const element = document.getElementById("card-container");
-
   const opt = {
     margin: 0,
     filename: 'skynet_cards.pdf',
@@ -103,63 +55,81 @@ function downloadPDF() {
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
-
   html2pdf().set(opt).from(element).save();
-}
-function downloadText() {
-  const cards = document.querySelectorAll('.card');
-  let codes = [];
-
-  cards.forEach(card => {
-    const code = card.querySelector('.code')?.textContent.trim();
-    if (code) codes.push(`"${code}"`);
-  });
-
-  if (codes.length === 0) {
-    alert("لم يتم العثور على رموز.");
-    return;
-  }
-
-  const comment = document.getElementById("comment").value || "";
-  const profile = document.getElementById("profile").value || "default";
-  const limit = document.getElementById("limit").value || "";
-  const server = document.getElementById("server").value || "sky.net";
-
-  const script = `:foreach user in={${codes.join(";")}} do={
-  /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}"
-}`;
-
-  const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'mikrotik_script.txt';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 }
 
 function copyScriptToClipboard() {
-  const cards = document.querySelectorAll('.card');
-  let codes = [];
-  cards.forEach(card => {
-    const code = card.querySelector('.code')?.textContent.trim();
-    if (code) codes.push(`"${code}"`);
-  });
-  if (codes.length === 0) {
-    alert("لم يتم العثور على رموز.");
+  if (!window.generatedUsers || window.generatedUsers.length === 0) {
+    alert("لم يتم توليد الكروت بعد");
     return;
   }
-  const comment = document.getElementById("comment").value || "";
-  const profile = document.getElementById("profile").value || "default";
-  const limit = document.getElementById("limit").value || "";
-  const server = document.getElementById("server").value || "sky.net";
-  const script = `:foreach user in={${codes.join(";")}} do={
-  /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}"
-}`;
-  navigator.clipboard.writeText(script).then(() => {
-    alert("✅ تم نسخ السكربت إلى الحافظة");
-  }, () => {
-    alert("❌ لم يتم النسخ. جرّب من متصفح آخر");
-  });
+
+  const usersList = window.generatedUsers.map(u => `"${u}"`).join(";");
+  const profile = document.getElementById("profile").value;
+  const limit = document.getElementById("limit").value;
+  const server = document.getElementById("server").value;
+  const comment = document.getElementById("comment").value;
+
+  const scriptText = `:foreach user in={${usersList}} do={ /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}" }`;
+  navigator.clipboard.writeText(scriptText)
+    .then(() => alert("✅ تم نسخ السكربت"))
+    .catch(err => alert("❌ فشل النسخ: " + err));
 }
 
+function downloadText() {
+  if (!window.generatedUsers || window.generatedUsers.length === 0) {
+    alert("لم يتم توليد الكروت بعد");
+    return;
+  }
+
+  const usersList = window.generatedUsers.map(u => `"${u}"`).join(";");
+  const profile = document.getElementById("profile").value;
+  const limit = document.getElementById("limit").value;
+  const server = document.getElementById("server").value;
+  const comment = document.getElementById("comment").value;
+
+  const scriptText = `:foreach user in={${usersList}} do={ /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}" }`;
+
+  const blob = new Blob([scriptText], { type: "text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "mikrotik_script.txt";
+  a.click();
+}
+
+// ميزة التعديل التلقائي حسب الباقة
+document.addEventListener("DOMContentLoaded", () => {
+  const infoSelect = document.getElementById("info");
+  if (infoSelect) {
+    infoSelect.addEventListener("change", function () {
+      const value = this.value;
+      if (value.includes("٣٠٠٠") || value.includes("3000")) {
+        document.getElementById("duration").value = "30 يوم";
+        document.getElementById("comment").value = "3000";
+        document.getElementById("limit").value = "limit-bytes-total=9659M limit-uptime=30d";
+        document.getElementById("size-select").value = "٩ جيجا / 30 يوم";
+      } else if (value.includes("٥٠٠") || value.includes("500")) {
+        document.getElementById("duration").value = "7 يوم";
+        document.getElementById("comment").value = "500";
+        document.getElementById("limit").value = "limit-bytes-total=1074M limit-uptime=7d";
+        document.getElementById("size-select").value = "١ جيجا / 7 يوم";
+      } else if (value.includes("١٠٠٠") || value.includes("1000")) {
+        document.getElementById("duration").value = "15 يوم";
+        document.getElementById("comment").value = "1000";
+        document.getElementById("limit").value = "limit-bytes-total=2148M limit-uptime=15d";
+        document.getElementById("size-select").value = "٢ جيجا / 15 يوم";
+      } else if (value.includes("١٦٠٠") || value.includes("1600")) {
+        document.getElementById("duration").value = "20 يوم";
+        document.getElementById("comment").value = "1600";
+        document.getElementById("limit").value = "limit-bytes-total=3072M limit-uptime=20d";
+        document.getElementById("size-select").value = "٣ جيجا / 20 يوم";
+      } else if (value.includes("٢٠٠٠") || value.includes("2000")) {
+        document.getElementById("duration").value = "25 يوم";
+        document.getElementById("comment").value = "2000";
+        document.getElementById("limit").value = "limit-bytes-total=5000M limit-uptime=25d";
+        document.getElementById("size-select").value = "٥ جيجا / 25 يوم";
+      }
+    });
+  }
+}
+);
