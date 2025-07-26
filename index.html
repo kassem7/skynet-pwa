@@ -6,63 +6,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style/style.css">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#007BFF">
+  <meta name="theme-color" content="blue">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <div>برنامج سكاي نت </div>
   <div class="controls">
     <div class="form-group">
       <label for="bg-select">الخلفية:</label>
       <select id="bg-select">
 <option value="card1.png">خلفية 1</option>
-<option value="card2.png">خلفية 2</option>
+<option value="card2.png">خلفية 3000</option>
 <option value="card3.png">خلفية 3</option>
 <option value="card4.png">خلفية 4</option>
 <option value="card5.png">خلفية 5</option>
 <option value="card6.png">خلفية 6</option>
 <option value="card7.png">خلفية 7</option>
 <option value="card8.png">خلفية 8</option>
-<option value="card9.png">خلفية 9</option>
+<option value="card9.png">خلفية 1000</option>
 <option value="card10.png">خلفية 10</option>
 <option value="card11.png">خلفية 11</option>
 <option value="card12.png">خلفية 12</option>
 <option value="card13.png">خلفية 13</option>
 <option value="card14.png">خلفية 14</option>
 <option value="card15.png">خلفية 15</option>
-<option value="card16.png">خلفية 16</option>
+<option value="card16.png">خلفية 500</option>
 <option value="card20.png">خلفية 20</option>
 <option value="card21.png">خلفية 21</option>
 <option value="card22.png">خلفية 22</option>
       </select>
     </div>
-    <div class="form-group"><label>اسم الشبكة:</label><input type="text" id="network-name" value="سكاي نت"></div>
-    <div class="form-group"><label>المدة:</label>
-      <select id="duration"><option>7 يوم</option><option selected>15 يوم</option><option>30 يوم</option></select>
-    </div>
+    
     <div class="form-group"><label>السعر والحجم:</label>
       <select id="info">
-        <option value="٥٠٠ ريال -- الحجم: ١ جيجا">٥٠٠ ريال -- الحجم: ١ جيجا</option>
-        <option value="١٠٠٠ ريال -- الحجم: ٢ جيجا" selected>١٠٠٠ ريال -- الحجم: ٢ جيجا</option>
-        <option value="١٥٠٠ ريال -- الحجم: ٣ جيجا">١٥٠٠ ريال -- الحجم: ٣ جيجا</option>
+        <option value="٥٠٠ ريال -- الحجم: ١ جيجا" > ٥٠٠ ريال -- الحجم: ١ جيجا</option>
+        <option value="١٠٠٠ ريال -- الحجم: ٢ جيجا">١٠٠٠ ريال -- الحجم: ٢ جيجا</option>
+        <option value="١٦٠٠ ريال -- الحجم: ٣ جيجا">١٦٠٠ ريال -- الحجم: ٣ جيجا</option>
         <option value="٢٠٠٠ ريال -- الحجم: ٥ جيجا">٢٠٠٠ ريال -- الحجم: ٥ جيجا</option>
-        <option value="٣٠٠٠ ريال -- الحجم: ٩ جيجا">٣٠٠٠ ريال -- الحجم: ٩ جيجا</option>
+        <option value="٣٠٠٠ ريال -- الحجم: ٩ جيجا" selected>٣٠٠٠ ريال -- الحجم: ٩ جيجا</option>
       </select>
     </div>
-    <div class="form-group"><label>بادئة الكود:</label><input type="text" id="prefix" value="w" maxlength="2"></div>
-    <div class="form-group"><label>عدد الصفحات:</label><input type="number" id="pages" value="1" min="1"></div>
-    <div class="form-group"><label>التعليق:</label><select id="comment"><option>500</option><option>1000</option><option>1500</option><option>2000</option><option selected>3000</option></select></div>
-    <div class="form-group"><label>الملف الشخصي:</label><input type="text" id="profile" value="default"></div>
     <div class="form-group"><label>الحجم والزمن:</label>
       <select id="limit">
-        <option value="limit-bytes-total=1024M limit-uptime=7d">1 جيجا / 7 يوم</option>
-        <option value="limit-bytes-total=2143M limit-uptime=15d">2 جيجا / 15 يوم</option>
-        <option value="limit-bytes-total=3072M limit-uptime=15d">3 جيجا / 15 يوم</option>
-        <option value="limit-bytes-total=5000M limit-uptime=30d">5 جيجا / 30 يوم</option>
+        <option value="limit-bytes-total=1074M limit-uptime=7d">1 جيجا / 7 يوم</option>
+        <option value="limit-bytes-total=2148M limit-uptime=15d">2 جيجا / 15 يوم</option>
+        <option value="limit-bytes-total=3072M limit-uptime=20d">3 جيجا / 20 يوم</option>
+        <option value="limit-bytes-total=5000M limit-uptime=25d">5 جيجا / 25 يوم</option>
         <option value="limit-bytes-total=9659M limit-uptime=30d" selected>9 جيجا / 30 يوم</option>
       </select>
     </div>
+    <div class="form-group"><label>المدة:</label>
+      <select id="duration"><option>7 يوم</option><option>15 يوم</option><option>20 يوم</option><option>25 يوم</option><option selected>30 يوم</option></select>
+    </div>
+    <div class="form-group"><label>اسم الشبكة:</label><input type="text" id="network-name" value="سكاي نت"></div>
+    <div class="form-group"><label>بادئة الكود:</label><input type="text" id="prefix" value="w" maxlength="2"></div>
+    <div class="form-group"><label>عدد الصفحات:</label><input type="number" id="pages" value="1" min="1"></div>
+    <div class="form-group"><label>التعليق:</label>
+      <input type="text" id="comment" placeholder="أدخل التعليق يدويًا">
+      <!--select id="comment"><option>500</option><option>1000</option><option>1600</option><option>2000</option><option selected>3000</option></select!--></div>
+    <div class="form-group"><label>الملف الشخصي:</label><input type="text" id="profile" value="default"></div>
+    
     <div class="form-group"><label>اسم السيرفر:</label>
-      <select id="server"><option selected>sky.net</option><option>home.net</option><option>fiber.local</option></select>
+      <input type="text" id="server"
+        value="sky.net"
+      >
+      <!--select id="server"><option selected>sky.net</option><option>home.net</option><option>fiber.local</option></select!-->
     </div>
     <button onclick="generateCards()">🌀 توليد كروت جديدة</button>
     <button onclick="downloadPDF()">📄 تحميل PDF</button>
