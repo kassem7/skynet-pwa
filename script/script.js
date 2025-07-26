@@ -92,17 +92,20 @@ function generateCards() {
 }
 
 function downloadPDF() {
+function downloadPDF() {
   const element = document.getElementById("card-container");
+
   const opt = {
     margin: 0,
-    filename: 'كروت_سكاي_نت_A4.pdf',
-    image: { type: 'jpeg', quality: 1 },
+    filename: 'skynet_cards.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
+
   html2pdf().set(opt).from(element).save();
 }
-
 function downloadText() {
   const cards = document.querySelectorAll('.card');
   let codes = [];
