@@ -3,25 +3,19 @@ const assets = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./style.css",
-  "./script.js",
-  "./card1.png"
+  "./style/style.css",
+  "./script/script.js",
+  "./img/card1.png"
 ];
 
-// تثبيت الملفات
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(cacheName).then(cache => {
-      return cache.addAll(assets);
-    })
+    caches.open(cacheName).then(cache => cache.addAll(assets))
   );
 });
 
-// عند الطلب من المتصفح
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request).then(res => res || fetch(event.request))
   );
 });
