@@ -82,13 +82,19 @@ function downloadText() {
     return;
   }
 
-  const usersList = window.generatedUsers.map(u => `"${u}"`).join(";");
   const profile = document.getElementById("profile").value;
   const limit = document.getElementById("limit").value;
   const server = document.getElementById("server").value;
   const comment = document.getElementById("comment").value;
 
-  const scriptText = `:foreach user in={${usersList}} do={ /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}" }`;
+  let scriptText = "";
+  const chunkSize = 56;
+
+  for (let i = 0; i < window.generatedUsers.length; i += chunkSize) {
+    const chunk = window.generatedUsers.slice(i, i + chunkSize);
+    const usersList = chunk.map(u => `"${u}"`).join(";");
+    scriptText += `:foreach user in={${usersList}} do={ /ip hotspot user add name=$user password="" profile=${profile} ${limit} server=${server} comment="${comment}" }\n\n`;
+  }
 
   const blob = new Blob([scriptText], { type: "text/plain" });
   const a = document.createElement("a");
