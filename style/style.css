@@ -1,166 +1,153 @@
+
 body {
-  font-family: 'Cairo', sans-serif;
-  margin: 0;
-  padding: 10px;
-  background: #f5f7fa;
+font-family: 'Arial', sans-serif;
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: white;
+  margin: 10;
+  padding: 0;
   direction: rtl;
+  text-align: center;
 }
+
 .controls {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  background-color: #060AFF; /*#157eed;*/
+  padding: 3px;
+  margin: 10px;
+  max-width: 960px;
+  /*max-height: 1500px;*/
+  border-radius: 60px;
+  box-shadow: 0 0 10px
+  rgba(0,0,0,0.1);
   display: flex;
+  font-family: arial;
+  text-align: center;
   flex-wrap: wrap;
-  gap: 15px;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  gap: 5px;
 }
-.form-group {
+
+.controls .form-group {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction:  column;
+  /*align-items: flex-center;*/
+  min-width: 170px;
+  min-height: 10px;
 }
-.form-group label {
+
+.controls label {
   font-size: 14px;
-  margin-bottom: 5px;
-  color: #333;
-}
-.form-group input,
-.form-group select {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  min-width: 180px;
-}
-button {
-  padding: 10px 18px;
-  font-size: 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #007BFF;
+  /*text-align: center;*/
+  margin-bottom: 2px;
   color: white;
-  transition: 0.3s;
 }
-button:hover {
+
+.controls input{
+  display: flex;
+  padding: 4px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  direction: ltr;
+  text-align: center;
+  /*align-content: center;*/
+  font-size: 14px;
+}
+
+.controls select {
+padding: 4px;
+width: 100%;
+border: 1px solid black;
+border-radius: 10px;
+text-align: center;
+font-size: 14px;
+}
+
+.controls button {
+  padding: 4px 10px;
+  width: 50%;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 1.3s;
+}
+
+.controls button:hover {
   background-color: #0056b3;
 }
+
+#card-container {
+margin: 20px auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
 .page {
-  width: 210mm;
-  height: 297mm;
-  padding: 5mm;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(9, 1fr);
-  gap: 4mm;
-  background: white;
-  box-sizing: border-box;
+  gap: 4px;
+  margin-bottom: 10px;
   page-break-after: always;
 }
+
 .card-wrapper {
-  position: relative;
+width: 185px;
+height: 70px;
+background-size: cover;
+position: relative;
 }
+
 .card {
-  background-size: cover;
-  background-position: center;
-  border-radius: 5px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5px;
-  font-size: 10px;
-  color: #000;
-  height: 100%;
-}
-.network {
-  color: red;
-  font-size: 13px;
-  font-weight: bold;
-}
-.code {
-  font-size: 12px;
-  font-weight: bold;
-  color: #0044cc;
-  margin: 13px 0;
-}
-.info {
-  font-size: 12px;
-  font-weight: bold;
-  color: deeppink;
-}
-.duration {
-  position: absolute;
-  top: 48px;
-  left: 8px;
-  color: deeppink;
-  font-size: 11px;
-  font-weight: bold;
+width: 100%;
+height: 100%;
+background-size: cover;
+background-position: center;
+position: relative;
+border-radius: 10px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 1px;
+page-break-inside: avoid;
 }
 
-/* استجابة شاشات الجوال */
-@media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .form-group {
-    width: 100%;
-  }
-  .form-group input,
-  .form-group select {
-    width: 100%;
-  }
-  button {
-    width: 100%;
-  }
-  .page {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(18, 1fr);
-  }
-  .card .network,
-  .card .code,
-  .card .info {
-    font-size: 10px;
-  }
+.card .network-name{
+font-size: 14px;
+color: red;
+position: absolute;
+top: 1px;
+font-weight: bold;
 }
-
-@media (max-width: 480px) {
-  body {
-    padding: 5px;
-  }
-
-  .controls {
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .form-group {
-    margin-bottom: 10px;
-  }
-
-  .form-group label {
-    font-size: 13px;
-  }
-
-  .form-group input,
-  .form-group select {
-    font-size: 14px;
-    padding: 6px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-
-  .card .network,
-  .card .code,
-  .card .info,
-  .card .duration {
-    font-size: 9px;
-  }
+.card .code{
+font-size: 14px;
+color: #0033cc;
+font-weight: bold;
+}
+.card .info{
+font-size: 10px;
+color: black;
+position: absolute;
+bottom: 1px;
+text-align: center;
+}
+.card .duration {
+position: absolute;
+left: 3px;
+color: black;
+font-size: 12px;
+font-weight: bold;
+}
+.card .username-label {
+font-size: 14px;
+color: black;
+position: absolute;
+right: 10px;
+font-weight: blod;
 }
